@@ -1,5 +1,4 @@
 import type { PathWatcherEvent, WebContainer } from '@webcontainer/api';
-import { getEncoding } from 'istextorbinary';
 import { map, type MapStore } from 'nanostores';
 import { Buffer } from 'node:buffer';
 import { path } from '~/utils/path';
@@ -937,7 +936,16 @@ function isBinaryFile(buffer: Uint8Array | undefined) {
     return false;
   }
 
-  return getEncoding(convertToBuffer(buffer), { chunkLength: 100 }) === 'binary';
+  // Lightweight binary detection: check for a NUL byte in the first 100 bytes.
+  // This avoids pulling in `istextorbinary` during the client/server bundle
+  // step and is sufficient for editor/file detection heuristics.
+  const len = Math.min(buffer.length, 100);
+
+  for (let i = 0; i < len; i++) {
+    if (buffer[i] === 0) return true;
+  }
+
+  return false;
 }
 
 /**

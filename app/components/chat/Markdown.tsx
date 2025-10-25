@@ -6,7 +6,7 @@ import { rehypePlugins, remarkPlugins, allowedHTMLElements } from '~/utils/markd
 import { Artifact, openArtifactInWorkbench } from './Artifact';
 import { CodeBlock } from './CodeBlock';
 import type { Message } from 'ai';
-import styles from './Markdown.module.scss';
+import styles from './Markdown.module.css';
 import ThoughtBox from './ThoughtBox';
 import type { ProviderInfo } from '~/types/model';
 

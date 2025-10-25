@@ -52,7 +52,12 @@ export default defineConfig((config) => {
     },
     resolve: {
       alias: {
-        path: 'path-browserify'
+        path: 'path-browserify',
+        // Map `util/types` imports (used by some node libs like undici) to the
+        // top-level `util` so Vite's resolver can find a browser-friendly shim.
+        // This avoids Rollup's commonjs resolver trying to open a non-existent
+        // `util/types` file in some pnpm layouts.
+        'util/types': 'util'
       }
     },
     plugins: [

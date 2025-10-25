@@ -1,0 +1,9 @@
+{
+  "framework": "remix",
+  "buildCommand": "pnpm exec remix build",
+  "devCommand": "pnpm exec remix dev",
+  "installCommand": "pnpm install",
+  "outputDirectory": ".vercel/output",
+  "regions": ["iad1"],
+  "public": true
+}

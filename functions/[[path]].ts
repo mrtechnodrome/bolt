@@ -1,12 +1,6 @@
-import type { ServerBuild } from '@remix-run/cloudflare';
-import { createPagesFunctionHandler } from '@remix-run/cloudflare-pages';
-
-export const onRequest: PagesFunction = async (context) => {
-  const serverBuild = (await import('../build/server')) as unknown as ServerBuild;
-
-  const handler = createPagesFunctionHandler({
-    build: serverBuild,
-  });
-
-  return handler(context);
+// This file was originally a Cloudflare Pages handler. For Vercel we use a
+// dedicated server entry at `api/index.ts`. Keep this file as-is for
+// reference but export a helpful message to avoid accidental invocation.
+export const onRequest = async () => {
+  return new Response('This handler is for Cloudflare Pages. Use the Vercel server entry instead.', { status: 501 });
 };

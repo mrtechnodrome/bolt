@@ -1,0 +1,1 @@
+var o=typeof navigator<"u"?navigator.platform.toLowerCase().includes("mac"):!1,e=typeof navigator<"u"?navigator.platform.toLowerCase().includes("win"):!1,n=typeof navigator<"u"?navigator.platform.toLowerCase().includes("linux"):!1;function t(){return globalThis.innerWidth<640}export{o as a,e as b,n as c,t as d};

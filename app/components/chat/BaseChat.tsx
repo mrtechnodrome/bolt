@@ -13,7 +13,7 @@ import { Messages } from './Messages.client';
 import { getApiKeysFromCookies } from './APIKeyManager';
 import Cookies from 'js-cookie';
 import * as Tooltip from '@radix-ui/react-tooltip';
-import styles from './BaseChat.module.scss';
+import styles from './BaseChat.module.css';
 import { ImportButtons } from '~/components/chat/chatExportAndImport/ImportButtons';
 import { ExamplePrompts } from '~/components/chat/ExamplePrompts';
 import GitCloneButton from './GitCloneButton';

@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react';
-import type { LinksFunction } from '@remix-run/cloudflare';
+import type { LinksFunction } from '@remix-run/node';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import tailwindReset from '@unocss/reset/tailwind-compat.css?url';
 import { themeStore } from './lib/stores/theme';
@@ -12,10 +12,10 @@ import { ClientOnly } from 'remix-utils/client-only';
 import { cssTransition, ToastContainer } from 'react-toastify';
 
 import reactToastifyStyles from 'react-toastify/dist/ReactToastify.css?url';
-import globalStyles from './styles/index.scss?url';
+import globalStyles from './styles/index.css?url';
 import xtermStyles from '@xterm/xterm/css/xterm.css?url';
 
-import 'virtual:uno.css';
+import unocssStyles from './styles/uno.css?url';
 
 const toastAnimation = cssTransition({
   enter: 'animated fadeInRight',
@@ -32,6 +32,7 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwindReset },
   { rel: 'stylesheet', href: globalStyles },
   { rel: 'stylesheet', href: xtermStyles },
+  { rel: 'stylesheet', href: unocssStyles },
   {
     rel: 'preconnect',
     href: 'https://fonts.googleapis.com',
