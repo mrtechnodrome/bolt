@@ -17,7 +17,43 @@ export default defineConfig((config) => {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     },
     build: {
-      target: 'esnext',
+        target: 'esnext',
+        rollupOptions: {
+          output: {
+            manualChunks(id) {
+              // For SSR build, don't create chunks for CodeMirror modules
+              if (config.isSsrBuild) {
+                return;
+              }
+            
+              // For client build, create chunks
+              if (id.includes('node_modules/@codemirror/state') ||
+                  id.includes('node_modules/@codemirror/view') ||
+                  id.includes('node_modules/@codemirror/language') ||
+                  id.includes('node_modules/@codemirror/commands') ||
+                  id.includes('node_modules/@codemirror/search') ||
+                  id.includes('node_modules/@codemirror/autocomplete')) {
+                return 'codemirror';
+              }
+
+              if (id.includes('node_modules/@codemirror/lang-')) {
+                return 'editor-langs';
+              }
+
+              if (id.includes('node_modules/@headlessui/react') ||
+                  id.includes('node_modules/@radix-ui/react-dialog') ||
+                  id.includes('node_modules/@radix-ui/react-popover') ||
+                  id.includes('node_modules/@radix-ui/react-tabs')) {
+                return 'ui-components';
+              }
+            }
+          }
+        }
+    },
+    resolve: {
+      alias: {
+        path: 'path-browserify'
+      }
     },
     plugins: [
       nodePolyfills({
